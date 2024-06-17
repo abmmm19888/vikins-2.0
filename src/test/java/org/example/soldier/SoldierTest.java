@@ -1,64 +1,35 @@
 package org.example.soldier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class SoldierTest {
+    private Soldier soldier;
 
-class SoldierTest {
-    int strength = 150;
-    int health = 300;
+    @BeforeEach
+    public void setUp() {
+        soldier = new Soldier(100, 20);
+    }
 
-//    @Test
-//    public void should_receive_2_arguments() {
-//        Soldier soldier = new Soldier(health, strength);
-//        assertNotNull(soldier);
-//    }
-//
-//    @Test
-//    public void should_receive_the_health_property_as_its_1st_argument() {
-//        Soldier soldier = new Soldier(health, strength);
-//        assertEquals(300, soldier.health);
-//    }
-//
-//    @Test
-//    public void should_receive_the_health_property_as_its_2st_argument() {
-//        Soldier soldier = new Soldier(health, strength);
-//        assertEquals(150, soldier.strength);
-//    }
-//
-//    @Test
-//    public void attack_should_receive_0_arguments() {
-//        Soldier soldier = new Soldier(health, strength);
-//        int damage = 50;
-//        int resultAttack = soldier.attack(damage);
-//        assertEquals(this.strength, resultAttack);
-//    }
-//
-//    @Test
-//    public void attack_should_return_a_integer() {
-//        Soldier soldier = new Soldier(health, strength);
-//        int resultAttack = soldier.attack();
-//        assertEquals("Integer", ((Object) resultAttack).getClass().getSimpleName());
-//    }
-//
-//    @Test
-//    public void attack_should_return_the_strength_property_of_the_Soldier() {
-//        Soldier soldier = new Soldier(health, strength);
-//        var resultAttack = soldier.attack();
-//        assertEquals(150, resultAttack);
-//    }
-//
-//    @Test
-//    public void damage_should_receive_1_arguments() {
-//        Soldier soldier = new Soldier(health, strength);
-//        soldier.receiveDamage(20);
-//        assertEquals(280, soldier.health);
-//    }
-//
-//    @Test
-//    public void should_remove_the_received_damage_from_the_health_property() {
-//        var soldier = new Soldier(health, strength);
-//        soldier.receiveDamage(30);
-//        assertEquals(270, soldier.health);
-//    }
+    @Test
+    public void testAttack() {
+        assertEquals(20, soldier.attack());
+    }
+
+    @Test
+    public void testReceiveDamage() {
+        soldier.receiveDamage(30);
+        assertEquals(70, soldier.getHealth());
+    }
+
+    @Test
+    public void testIsAlive() {
+        assertTrue(soldier.isAlive());
+
+        soldier.receiveDamage(100);
+        assertFalse(soldier.isAlive());
+    }
 }
